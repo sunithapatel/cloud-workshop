@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Google Summer of Code",
+    "body": "Google Summer of Code program is a program started by Google and has completed 16 years. It is a program that aims to promote open-source software development among university students. There are a few organizations and these organizations have mentors.",
+    "url": "https://summerofcode.withgoogle.com/",
+    "eligibility_criteria": "none",
+    "internship_period": 3,
+    "application_period": [
+      {
+        "id": 1,
+        "name": "March"
+      },
+      {
+        "id": 2,
+        "name": "April"
+      }
+    ],
+    "stipend": true,
+    "location": [
+      {
+        "id": 1,
+        "name": "Remote"
+      }
+    ],
+    "description": "You can work with famous organizations like, Debian, Fedora, GCC, FreeBSD, Git (Not GitHub), Gnome, OpenSUSE Arduino, and other more top names in Open Source community."
+  },
+  {
+    "id": 2,
+    "name": "Free Software Foundation (FSF)",
+    "body": "If you want to intern at the Free Software Foundation and you know web development, systems, networking, software licensing you can consider the FSF internship program. It has pretty good projects over there and here you get to work with the organizations that sponsor the GNU Project.",
+    "url": "https://www.fsf.org/volunteer/internships",
+    "eligibility_criteria": "none",
+    "internship_period": 3,
+    "application_period": [
+      {
+        "id": 3,
+        "name": "April"
+      },
+      {
+        "id": 4,
+        "name": "May"
+      }
+    ],
+    "stipend": false,
+    "location": [
+      {
+        "id": 1,
+        "name": "Remote"
+      },
+      {
+        "id": 1,
+        "name": "Boston"
+      },
+      {
+        "id": 1,
+        "name": "US"
+      }
+    ],
+    "description": "The oldest, mother of all organizations which started the free software movement. The Internship program runs thrice a year."
+  }
+]
