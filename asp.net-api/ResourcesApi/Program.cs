@@ -15,6 +15,15 @@ if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<ResourceDbContext>(opt =>
         opt.UseInMemoryDatabase("Resource"));
+    
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost",
+                            builder =>
+                            {
+                                builder.WithOrigins("http://localhost:3000");
+                            });
+    });
 }
 else
 {
@@ -28,6 +37,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseCors("AllowLocalhost");
 
     using (var scope = app.Services.CreateScope())
     {

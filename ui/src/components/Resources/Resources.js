@@ -10,7 +10,7 @@ export default function Resources() {
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
-    const url = "http://localhost:7071/api/GetResources";
+    const url = "http://localhost:7071/api/Resources";
 
     const fetchData = async () => {
       try {
