@@ -4,6 +4,6 @@ namespace ResourcesApi.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public ICollection<Resource> Resources { get; set; } = null!;
+        public Resource Resource { get; set; } = null!;
     }
 }

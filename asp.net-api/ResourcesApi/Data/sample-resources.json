@@ -9,11 +9,11 @@
     "application_period": [
       {
         "id": 1,
-        "name": "March"
+        "month": "March"
       },
       {
         "id": 2,
-        "name": "April"
+        "month": "April"
       }
     ],
     "stipend": true,
@@ -35,11 +35,11 @@
     "application_period": [
       {
         "id": 3,
-        "name": "April"
+        "month": "April"
       },
       {
         "id": 4,
-        "name": "May"
+        "month": "May"
       }
     ],
     "stipend": false,

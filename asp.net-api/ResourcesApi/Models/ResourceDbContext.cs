@@ -20,7 +20,7 @@ namespace ResourcesApi.Models
                 .WithOne(x => x.Resource);
             modelBuilder.Entity<Resource>()
                 .HasMany<ResourceLocation>(r => r.Locations)
-                .WithMany(l => l.Resources);
+                .WithOne(l => l.Resource);
         }
     }
 }
