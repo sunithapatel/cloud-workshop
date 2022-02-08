@@ -1,5 +1,5 @@
-using ResourcesApi.Models;
 using Newtonsoft.Json;
+using ResourcesApi.Models;
 
 namespace ResourcesApi.Data
 {
@@ -12,22 +12,42 @@ namespace ResourcesApi.Data
                 return;
             }
 
-            var sampleResourcesFromFile = File.ReadAllText("Data/sample-resources.json");
-            var sampleResources = JsonConvert.DeserializeObject<Resource[]>(sampleResourcesFromFile) ?? new Resource[0];
-
-            sampleResources[0].ApplicationPeriods = new List<ResourceApplicationPeriod> 
+            string resourcesFromFile = File.ReadAllText("Data/sample-resources.json");
+            dynamic? resources = JsonConvert.DeserializeObject(resourcesFromFile);
+            if (resources == null) 
             {
-                new ResourceApplicationPeriod { Month = "March" },
-                new ResourceApplicationPeriod { Month = "April" }
-            };
+                return;
+            }
 
-            sampleResources[0].Locations = new List<ResourceLocation> 
+            foreach(dynamic resource in resources)
             {
-                new ResourceLocation { Name = "Remote" }
-            };
+                var newResource = new Resource
+                {
+                    Id = resource.id,
+                    Name = resource.name,
+                    Body = resource.body,
+                    Url = resource.url,
+                    EligibilityCriteria = resource.eligibility_criteria,
+                    InternshipPeriod = resource.internship_period,
+                    Stipend = resource.stipend,
+                    Description = resource.description
+                };
+                
+                newResource.ApplicationPeriods = new List<ResourceApplicationPeriod>();
+                foreach(dynamic applicationPeriod in resource.application_period)
+                {
+                    newResource.ApplicationPeriods.Add(new ResourceApplicationPeriod { Month = applicationPeriod });
+                }
 
-            resourceDbContext.AddRange(sampleResources);
-            resourceDbContext.SaveChanges();
+                newResource.Locations = new List<ResourceLocation>();
+                foreach(dynamic location in resource.location)
+                {
+                    newResource.Locations.Add(new ResourceLocation { Name = location });
+                }
+
+                resourceDbContext.Add(newResource);
+                resourceDbContext.SaveChanges();
+            }
         }
     }
 }

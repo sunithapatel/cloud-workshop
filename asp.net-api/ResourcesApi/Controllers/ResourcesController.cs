@@ -28,7 +28,10 @@ namespace ResourcesApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Resource>> GetResource(int id)
         {
-            var resource = await _context.Resources.FindAsync(id);
+            var resource = await _context.Resources
+                .Include(r => r.ApplicationPeriods)
+                .Include(r => r.Locations)
+                .FirstOrDefaultAsync(r => r.Id == id);
 
             if (resource == null)
             {
