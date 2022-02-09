@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using ResourcesApi.Models;
-using ResourcesApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +10,19 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ResourceDbContext>(opt =>
+    opt.UseSqlServer(builder.Configuration["DatabaseConnectionString"]));
+
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDbContext<ResourceDbContext>(opt =>
-        opt.UseInMemoryDatabase("Resource"));
+    /* 
+        Uncomment the two lines below and comment out lines 14-15
+        if you do not have SQL Server running locally.
+    */
+    // builder.Services.AddDbContext<ResourceDbContext>(opt =>
+    //     opt.UseInMemoryDatabase("Resource"));
     
+    // Allow CORS for the local React app to be able to use this API.
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowLocalhost",
@@ -24,11 +31,6 @@ if (builder.Environment.IsDevelopment())
                                 builder.WithOrigins("http://localhost:3000");
                             });
     });
-}
-else
-{
-    builder.Services.AddDbContext<ResourceDbContext>(opt =>
-        opt.UseSqlServer(builder.Configuration["DatabaseConnectionString"]));
 }
 
 var app = builder.Build();
@@ -39,17 +41,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     app.UseCors("AllowLocalhost");
-
-    using (var scope = app.Services.CreateScope())
-    {
-        var services = scope.ServiceProvider;
-
-        var context = services.GetRequiredService<ResourceDbContext>();
-        DbInitializer.Initialize(context);
-    }
 }
-
-//app.UseHttpsRedirection();
+else
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 

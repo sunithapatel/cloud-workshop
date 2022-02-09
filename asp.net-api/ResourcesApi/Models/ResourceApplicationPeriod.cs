@@ -4,6 +4,7 @@ namespace ResourcesApi.Models
     {
         public int Id { get; set; }
         public string Month { get; set; } = null!;
+        public int ResourceId { get; set; }
         public Resource Resource { get; set; } = null!;
     }
 }

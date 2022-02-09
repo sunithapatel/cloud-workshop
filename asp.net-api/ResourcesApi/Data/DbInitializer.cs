@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ResourcesApi.Models;
 
@@ -5,13 +6,8 @@ namespace ResourcesApi.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(ResourceDbContext resourceDbContext)
+        public static void SeedData(ModelBuilder modelBuilder)
         {
-            if (resourceDbContext.Resources.Any())
-            {
-                return;
-            }
-
             string resourcesFromFile = File.ReadAllText("Data/sample-resources.json");
             dynamic? resources = JsonConvert.DeserializeObject(resourcesFromFile);
             if (resources == null) 
@@ -19,11 +15,15 @@ namespace ResourcesApi.Data
                 return;
             }
 
+            int resourceKey = 1;
+            int applicationPeriodKey = 1;
+            int locationKey = 1;
+
             foreach(dynamic resource in resources)
             {
                 var newResource = new Resource
                 {
-                    Id = resource.id,
+                    Id = resourceKey,
                     Name = resource.name,
                     Body = resource.body,
                     Url = resource.url,
@@ -36,17 +36,32 @@ namespace ResourcesApi.Data
                 newResource.ApplicationPeriods = new List<ResourceApplicationPeriod>();
                 foreach(dynamic applicationPeriod in resource.application_period)
                 {
-                    newResource.ApplicationPeriods.Add(new ResourceApplicationPeriod { Month = applicationPeriod });
+                    modelBuilder.Entity<ResourceApplicationPeriod>()
+                        .HasData(new ResourceApplicationPeriod
+                                { 
+                                    Id = applicationPeriodKey,
+                                    Month = applicationPeriod, 
+                                    ResourceId = newResource.Id
+                                });
+                    applicationPeriodKey++;
                 }
 
                 newResource.Locations = new List<ResourceLocation>();
                 foreach(dynamic location in resource.location)
                 {
-                    newResource.Locations.Add(new ResourceLocation { Name = location });
+                    modelBuilder.Entity<ResourceLocation>()
+                        .HasData(new ResourceLocation 
+                                {
+                                    Id = locationKey,
+                                    Name = location,
+                                    ResourceId = newResource.Id
+                                });
+                    locationKey++;
                 }
 
-                resourceDbContext.Add(newResource);
-                resourceDbContext.SaveChanges();
+                modelBuilder.Entity<Resource>().HasData(newResource);
+
+                resourceKey++;
             }
         }
     }

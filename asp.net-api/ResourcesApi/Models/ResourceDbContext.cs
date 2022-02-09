@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ResourcesApi.Data;
 
 namespace ResourcesApi.Models
 {
@@ -14,13 +15,18 @@ namespace ResourcesApi.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Resource>().HasKey("Id");
+            modelBuilder.Entity<Resource>().HasKey(r => r.Id);
+            modelBuilder.Entity<ResourceApplicationPeriod>().HasKey(a => a.Id);
+            modelBuilder.Entity<ResourceLocation>().HasKey(l => l.Id);
+
             modelBuilder.Entity<Resource>()
                 .HasMany<ResourceApplicationPeriod>(r => r.ApplicationPeriods)
                 .WithOne(x => x.Resource);
             modelBuilder.Entity<Resource>()
                 .HasMany<ResourceLocation>(r => r.Locations)
                 .WithOne(l => l.Resource);
+            
+            DbInitializer.SeedData(modelBuilder);
         }
     }
 }
