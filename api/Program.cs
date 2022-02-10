@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ResourceDbContext>(opt =>
-    opt.UseSqlServer(builder.Configuration["DatabaseConnectionString"]));
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("WWCFEStudyGroupDatabase")));
 
 if (builder.Environment.IsDevelopment())
 {
