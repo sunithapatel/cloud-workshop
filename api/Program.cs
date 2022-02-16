@@ -22,7 +22,7 @@ if (builder.Environment.IsDevelopment())
     // builder.Services.AddDbContext<ResourceDbContext>(opt =>
     //     opt.UseInMemoryDatabase("Resource"));
     
-    // Allow CORS for the local React app to be able to use this API.
+    //Allow CORS for the local React app to be able to use this API.
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowLocalhost",

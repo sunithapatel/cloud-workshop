@@ -4,7 +4,6 @@ import './Resources.css';
 import { Link } from "react-router-dom";
 import Toggle from "../Toggle";
 import Disclaimer from "../Disclaimer/Disclaimer";
-import config from '../../environment.json';
 
 export default function Resources() {
 
@@ -13,7 +12,7 @@ export default function Resources() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(config.RESOURCE_API_URL, { mode: "cors" });
+        const response = await fetch(process.env.REACT_APP_RESOURCE_API_URL, { mode: "cors" });
         const json = await response.json();
         setResources(json);
 
