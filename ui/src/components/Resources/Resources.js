@@ -12,7 +12,7 @@ export default function Resources() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.REACT_APP_RESOURCE_API_URL, { mode: "cors" });
+        const response = await fetch(`${process.env.REACT_APP_RESOURCE_API_URL}/api/Resources`, { mode: "cors" });
         const json = await response.json();
         setResources(json);
 
