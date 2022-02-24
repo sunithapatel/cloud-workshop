@@ -71,3 +71,17 @@ Or instead, you can click F5 in Visual Studio Code to run with debugging that wi
 cd ui
 npm start
 ```
+
+## Deployment to Azure
+
+There are two services we can use in Azure to deploy the applications and the database.
+
+- The frontend React app and the backend .NET API can be hosted in [Azure App Service](https://azure.microsoft.com/en-us/services/app-service/).
+- The database can be hosted using [Azure SQL](https://azure.microsoft.com/en-us/products/azure-sql/) - a managed service for SQL Server database in Azure
+
+> There are other ways to web applications like [Azure Static Web Apps](https://azure.microsoft.com/en-us/services/app-service/static/) which will be covered later in a separate section.
+
+![Azure Deployment Diagram](./docs/AzureDeployment.png)
+
+Visual Studio Code has an [Azure App Service extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) we will use to do the deployments. Later we will see how to do this using a Continuous Integration & Deployment tool like GitHub Actions.
+
