@@ -1,6 +1,11 @@
-# Women Who Code Frontend & Cloud Workshop Series
+# Workshop to Deploy to Azure with Azure App Service and SQL Azure
 
-This is a full stack sample application used for a workshop series hosted by Women Who Code Frontend & Cloud track to walk through deploying a web application to the cloud.
+This is for the first two sessions in the **Let Your Code Fly High!** workshop series hosted in collaboration with Women Who Code [Frontend](https://www.womenwhocode.com/frontend) & [Cloud](https://www.womenwhocode.com/cloud) to showcase various ways to deploy a web application to the cloud.
+
+## Video Recordings
+
+- [Session 1 - Run web application locally](https://youtu.be/qDXFzCUubWU)
+- Session 2 - Deploy to Azure - coming soon!
 
 ## Sample Application Architecture
 
@@ -15,8 +20,7 @@ This is a full stack sample application used for a workshop series hosted by Wom
         - C# extension from Microsoft (ms-dotnettools.csharp)
         - SQL Server from Microsoft (ms-mssql.mssql) - if you want to connect to SQL Server
 - .Net 6 SDK - https://dotnet.microsoft.com/en-us/download 
-- Entity Framework CLI - https://docs.microsoft.com/en-us/ef/core/cli/dotnet 
-- Azure CLI - https://docs.microsoft.com/en-us/cli/azure/ 
+- Entity Framework CLI - https://docs.microsoft.com/en-us/ef/core/cli/dotnet
 - Nodejs - https://nodejs.org/en/
 - Docker Desktop (if you want to run SQL Server locally)
     - [Click here for instructions to run SQL Server as a docker container](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker)
@@ -25,7 +29,7 @@ This is a full stack sample application used for a workshop series hosted by Wom
 
 It is possible to run the full application on your machine after you have installed the tools above and cloned this repository to your machine.
 
-> The commands below assume you are in the root of this repository.
+> The commands below assume you are in the this folder (workshop-1-azure-app-service-and-sql-azure).
 
 ### Initial set up of the database
 
